@@ -108,10 +108,17 @@ if ("IntersectionObserver" in window && !reduceMovimiento) {
 
                 if (entrada.isIntersecting) {
 
-                    entrada.target.classList.add("visible");
-                    observador.unobserve(entrada.target);
+    const elemento = entrada.target;
 
-                }
+    elemento.classList.add("visible");
+    observador.unobserve(elemento);
+
+    setTimeout(function () {
+        elemento.classList.remove("animar-scroll", "visible");
+        elemento.style.transitionDelay = "";
+    }, 1000);
+
+}
 
             });
 
@@ -269,5 +276,31 @@ document.addEventListener("keydown", function (evento) {
     if (evento.key === "Escape") {
         cerrarTestimonio();
     }
+
+});
+
+const botonesVerMas = document.querySelectorAll(".boton-ver-mas");
+
+botonesVerMas.forEach((boton) => {
+
+    boton.addEventListener("click", () => {
+
+        const info = boton.nextElementSibling;
+
+        info.classList.toggle("activa");
+
+        if (info.classList.contains("activa")) {
+
+            boton.innerHTML =
+                'Ver menos <span class="dedito dedito-arriba">👆</span>';
+
+        } else {
+
+            boton.innerHTML =
+                'Ver más <span class="dedito">👇</span>';
+
+        }
+
+    });
 
 });

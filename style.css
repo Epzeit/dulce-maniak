@@ -820,17 +820,10 @@ mientras se recorre toda esta zona.
 
 .animar-scroll.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
-.zona-fondo-secundaria .zona-fondo-capa {
-    background: linear-gradient(
-        180deg,
-        rgba(65, 20, 35, 0.58),
-        rgba(110, 45, 68, 0.55),
-        rgba(55, 18, 30, 0.68)
-    );
-}
+
 
 
 /* =========================
@@ -1081,5 +1074,257 @@ mientras se recorre toda esta zona.
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+    
+}
+
+/* =========================
+   VER MÁS / DETALLES PRODUCTO
+========================= */
+
+.boton-ver-mas {
+    display: block;
+
+    margin: 14px auto 0;
+    padding: 7px 12px;
+
+    border: none;
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.boton-ver-mas:hover {
+    color: #ffffff;
+    transform: translateY(2px);
+}
+
+
+/* CAJA OCULTA */
+
+.info-producto {
+    display: none;
+
+    width: 100%;
+    margin-top: 15px;
+    padding: 18px;
+
+    text-align: left;
+
+    background: rgba(48, 18, 29, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 28px rgba(20, 5, 12, 0.28);
+}
+
+
+/* CUANDO SE ABRE */
+
+.info-producto.activa {
+    display: block;
+
+    animation: abrirDetalle 0.35s ease;
+}
+
+@keyframes abrirDetalle {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* TEXTOS */
+
+.info-producto p {
+    margin: 7px 0;
+
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.info-producto strong {
+    color: #ffffff;
+}
+
+
+/* DESCRIPCIÓN */
+
+.descripcion-producto {
+    margin-bottom: 14px !important;
+
+    color: #f7dce4 !important;
+
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+}
+
+
+/* AVISO 48 HORAS */
+
+.aviso-producto {
+    margin: 14px 0 !important;
+    padding: 10px 12px;
+
+    background: rgba(217, 143, 163, 0.13);
+
+    border-left: 3px solid #d98fa3;
+    border-radius: 7px;
+
+    color: #ffffff !important;
+}
+
+
+/* TÍTULO DENTRO DEL DETALLE */
+
+.info-producto h4 {
+    margin: 15px 0 10px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    letter-spacing: 0.4px;
+}
+
+
+/* CADA TAMAÑO */
+
+.detalle-tamano {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 10px;
+    padding: 10px 12px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.detalle-tamano strong {
+    margin-bottom: 3px;
+
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.detalle-tamano span {
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+/* PRECIO */
+
+.detalle-tamano .precio {
+    margin-top: 5px;
+
+    color: #f4b3c5;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* ADICIONALES */
+
+.adicionales-producto {
+    margin-top: 15px;
+    padding-top: 12px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+
+/* =========================
+   DETALLES EN CELULAR
+========================= */
+
+@media (max-width: 768px) {
+
+    .boton-ver-mas {
+        margin-top: 12px;
+
+        font-size: 15px;
+    }
+
+    .info-producto {
+        padding: 16px;
+    }
+
+    .info-producto p {
+        font-size: 14px;
+    }
+
+    .detalle-tamano {
+        padding: 11px;
+    }
+
+    .detalle-tamano strong {
+        font-size: 15px;
+    }
+
+    .detalle-tamano span {
+        font-size: 14px;
+    }
+
+    .detalle-tamano .precio {
+        font-size: 16px;
+    }
+}
+
+.zona-fondo-secundaria .zona-fondo-video {
+    filter: brightness(0.82) contrast(0.88) saturate(0.95);
+}
+
+.animar-scroll,
+.animar-scroll.visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.dedito {
+    display: inline-block;
+    margin-left: 3px;
+
+    animation: movimientoDedito 1.5s ease-in-out infinite;
+}
+
+@keyframes movimientoDedito {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
     }
 }
