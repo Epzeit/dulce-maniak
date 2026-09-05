@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dulce Maniak | Pastelería</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="barra-progreso" id="barra-progreso"></div>
+
+    <header class="header">
+
+        <div class="logo">
+            Dulce Maniak <span>🍰</span>
+        </div>
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+        <nav class="menu" id="menu">
+            <a href="#">Inicio</a>
+            <a href="#catalogo">Productos</a>
+            <a href="#porciones">Porciones</a>
+            <a href="#pedidos">Pedidos</a>
+
+            <a
+                href="https://www.instagram.com/dulce_maniak/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Instagram
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- PORTADA -->
+    <section class="portada">
+
+        <div class="texto-portada">
+            <h1>Dulce Maniak</h1>
+
+            <p>Pastelería artesanal ❤️</p>
+
+            <p>Tortas • Desayunos • Mesas dulces</p>
+
+            <a href="#catalogo" class="boton">
+                Ver catálogo
+            </a>
+        </div>
+
+        <div class="imagen-portada">
+            <video autoplay muted loop playsinline>
+                <source src="imagenes/portada.mp4" type="video/mp4">
+            </video>
+        </div>
+
+    </section>
+
+
+    <!-- FONDO CONTINUO -->
+    <main class="zona-fondo">
+
+        <video
+            class="zona-fondo-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+        >
+            <source src="imagenes/video3.mp4" type="video/mp4">
+        </video>
+
+        <div class="zona-fondo-capa"></div>
+
+
+        <!-- CATÁLOGO -->
+        <section id="catalogo" class="catalogo">
+
+            <h2>Nuestras delicias</h2>
+
+            <div class="productos">
+
+                <article class="producto">
+                    <img
+                        src="imagenes/marquise4x4.png"
+                        alt="Torta Marquise 4x4"
+                        loading="lazy"
+                    >
+
+                    <h3>Marquise 4x4</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="Marquise 4x4"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/frutillaconcrema.png"
+                        alt="Torta de frutilla con crema"
+                        loading="lazy"
+                    >
+
+                    <h3>Frutilla con crema</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="Frutilla con crema"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/marquisconfrutosrojos.png"
+                        alt="Marquise con frutos rojos"
+                        loading="lazy"
+                    >
+
+                    <h3>Marquise con frutos rojos</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="Marquise con frutos rojos"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/chocotorta.png"
+                        alt="Chocotorta"
+                        loading="lazy"
+                    >
+
+                    <h3>Chocotorta</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="Chocotorta"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/brownie.png"
+                        alt="Torta brownie"
+                        loading="lazy"
+                    >
+
+                    <h3>Brownie</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="Brownie"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+            </div>
+
+                </section>
+
+    </main>
+
+
+    <!-- SEGUNDO FONDO CONTINUO -->
+    <main class="zona-fondo zona-fondo-secundaria">
+
+        <video
+            class="zona-fondo-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-hidden="true"
+        >
+            <source src="imagenes/video4.mp4" type="video/mp4">
+        </video>
+
+        <div class="zona-fondo-capa"></div>
+
+
+        <!-- PORCIONES -->
+        <section class="porciones" id="porciones">
+            <h2>Porciones disponibles</h2>
+
+            <p class="texto-porciones">
+                Consultá los sabores disponibles del día.
+            </p>
+
+            <div class="lista-porciones">
+
+                <article class="producto">
+                    <img
+                        src="imagenes/matildaporcion.png"
+                        alt="Porción Matilda"
+                        loading="lazy"
+                    >
+
+                    <h3>Matilda</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="la porción Matilda"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/zanahoriaporcion.png"
+                        alt="Porción de torta de zanahoria"
+                        loading="lazy"
+                    >
+
+                    <h3>Zanahoria</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="la porción de Zanahoria"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/Redvelvet.png"
+                        alt="Porción Red Velvet"
+                        loading="lazy"
+                    >
+
+                    <h3>Red Velvet</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="la porción Red Velvet"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/porcionbalcarce.png"
+                        alt="Porción Balcarce"
+                        loading="lazy"
+                    >
+
+                    <h3>Balcarce</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="la porción Balcarce"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+
+                <article class="producto">
+                    <img
+                        src="imagenes/tortaoreo.png"
+                        alt="Porción Oreo"
+                        loading="lazy"
+                    >
+
+                    <h3>Oreo</h3>
+
+                    <a
+                        class="boton-whatsapp"
+                        data-producto="la porción Oreo"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Consultar
+                    </a>
+                </article>
+
+            </div>
+
+        </section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios" id="testimonios">
+
+    <h2>Ustedes ❤️</h2>
+
+    <p class="texto-testimonios">
+        Gracias por elegirnos y compartir sus momentos más dulces.
+    </p>
+
+    <div class="galeria-testimonios">
+
+        <button class="testimonio" data-imagen="imagenes/testimonio1.png" aria-label="Ampliar testimonio 1">
+            <img src="imagenes/testimonio1.png" alt="Comentario de cliente 1" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio2.png" aria-label="Ampliar testimonio 2">
+            <img src="imagenes/testimonio2.png" alt="Comentario de cliente 2" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio3.png" aria-label="Ampliar testimonio 3">
+            <img src="imagenes/testimonio3.png" alt="Comentario de cliente 3" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio4.png" aria-label="Ampliar testimonio 4">
+            <img src="imagenes/testimonio4.png" alt="Comentario de cliente 4" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio5.png" aria-label="Ampliar testimonio 5">
+            <img src="imagenes/testimonio5.png" alt="Comentario de cliente 5" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio6.png" aria-label="Ampliar testimonio 6">
+            <img src="imagenes/testimonio6.png" alt="Comentario de cliente 6" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio8.png" aria-label="Ampliar testimonio 8">
+            <img src="imagenes/testimonio8.png" alt="Comentario de cliente 8" loading="lazy">
+        </button>
+
+        <button class="testimonio" data-imagen="imagenes/testimonio9.png" aria-label="Ampliar testimonio 9">
+            <img src="imagenes/testimonio9.png" alt="Comentario de cliente 9" loading="lazy">
+        </button>
+
+       
+
+  
+
+    </div>
+
+</section>
+
+
+<!-- VISOR DE TESTIMONIOS -->
+<div class="visor-testimonio" id="visor-testimonio" aria-hidden="true">
+
+    <button
+        class="cerrar-visor"
+        id="cerrar-visor"
+        aria-label="Cerrar imagen"
+    >
+        ✕
+    </button>
+
+    <img
+        id="imagen-ampliada"
+        src=""
+        alt="Testimonio ampliado"
+    >
+
+</div>
+
+        <!-- PEDIDOS -->
+        <section id="pedidos" class="pedidos">
+
+            <div class="pedidos-contenido">
+
+                <h2>Hacé tu pedido 💕</h2>
+
+                <p>
+                    ¿Tenés algo dulce en mente?
+                    Escribinos y armamos tu pedido.
+                </p>
+
+                <a
+                    class="boton-whatsapp"
+                    href="https://wa.me/5491133293726?text=Hola%20Dulce%20Maniak%2C%20quer%C3%ADa%20hacer%20un%20pedido"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Pedir por WhatsApp
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <p>© 2026 Dulce Maniak</p>
+
+        <div class="footer-links">
+
+            <a
+                href="https://www.instagram.com/dulce_maniak/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Instagram
+            </a>
+
+            <a
+                href="https://wa.me/5491133293726"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                WhatsApp
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- MAMÁ FLOTANTE -->
+    <div class="mama-flotante">
+
+        <img
+            src="imagenes/giftdulcemaniak.png"
+            alt="Dulce Maniak"
+        >
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
