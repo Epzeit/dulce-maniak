@@ -304,3 +304,28 @@ botonesVerMas.forEach((boton) => {
     });
 
 });
+// ===============================
+// FORZAR VIDEOS DE FONDO EN CELULAR
+// ===============================
+
+document.querySelectorAll(".zona-fondo-video").forEach((video) => {
+
+    video.muted = true;
+    video.playsInline = true;
+
+    function reproducirVideo() {
+        video.play().catch(() => {});
+    }
+
+    reproducirVideo();
+
+    document.addEventListener(
+        "touchstart",
+        reproducirVideo,
+        {
+            once: true,
+            passive: true
+        }
+    );
+
+});
