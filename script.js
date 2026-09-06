@@ -329,3 +329,63 @@ document.querySelectorAll(".zona-fondo-video").forEach((video) => {
     );
 
 });
+
+document.querySelectorAll("video").forEach((video) => {
+
+    video.muted = true;
+    video.playsInline = true;
+
+    const reproducir = () => {
+        video.play().catch(() => {});
+    };
+
+    reproducir();
+
+    document.addEventListener("touchstart", reproducir, {
+        once: true,
+        passive: true
+    });
+
+});
+
+// =========================
+// GALERÍA DE PRODUCTOS
+// =========================
+
+document.querySelectorAll(".galeria-producto").forEach(galeria => {
+
+    const fotos = galeria.querySelectorAll(".foto-producto");
+    const izquierda = galeria.querySelector(".flecha-izquierda");
+    const derecha = galeria.querySelector(".flecha-derecha");
+
+    let actual = 0;
+
+    function mostrarFoto(indice) {
+        fotos.forEach(foto => {
+            foto.classList.remove("activa");
+        });
+
+        fotos[indice].classList.add("activa");
+    }
+
+    derecha.addEventListener("click", () => {
+        actual++;
+
+        if (actual >= fotos.length) {
+            actual = 0;
+        }
+
+        mostrarFoto(actual);
+    });
+
+    izquierda.addEventListener("click", () => {
+        actual--;
+
+        if (actual < 0) {
+            actual = fotos.length - 1;
+        }
+
+        mostrarFoto(actual);
+    });
+
+});

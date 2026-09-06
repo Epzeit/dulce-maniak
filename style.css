@@ -1328,3 +1328,301 @@ mientras se recorre toda esta zona.
         transform: translateY(5px);
     }
 }
+
+/* =========================
+   GALERÍA DE PRODUCTOS
+========================= */
+
+.galeria-producto {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.galeria-producto .foto-producto {
+    display: none;
+
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+    border-radius: 5px;
+
+    margin: 0 !important;
+}
+
+.galeria-producto .foto-producto.activa {
+    display: block;
+}
+
+
+/* FLECHAS */
+
+.galeria-producto .flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.40);
+    color: white;
+
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.galeria-producto .flecha-izquierda {
+    left: 8px;
+}
+
+.galeria-producto .flecha-derecha {
+    right: 8px;
+}
+
+
+/* =========================
+   INFORMACIÓN IMPORTANTE
+========================= */
+
+.info-importante {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+    min-height: 700px;
+
+    padding: 80px 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 225, 228, 0.92),
+            rgba(255, 240, 238, 0.94)
+        );
+}
+
+
+/* MAMÁ */
+
+.info-mama {
+    width: 35%;
+    align-self: flex-end;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.info-mama img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+
+    object-fit: contain;
+
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.18));
+}
+
+
+/* CONTENIDO */
+
+.info-contenido {
+    position: relative;
+    z-index: 2;
+
+    width: 65%;
+    max-width: 1050px;
+
+    text-align: center;
+}
+
+.info-contenido h2 {
+    margin-bottom: 10px;
+
+    font-size: clamp(32px, 4vw, 55px);
+    color: #3b2027;
+}
+
+.info-subtitulo {
+    margin-bottom: 35px;
+
+    font-size: 19px;
+    color: #60464c;
+}
+
+
+/* TARJETAS */
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.info-card {
+    padding: 28px 25px;
+
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.55);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow: 0 15px 35px rgba(80, 25, 40, 0.08);
+
+    text-align: left;
+}
+
+.info-icono {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(225, 143, 163, 0.28);
+
+    font-size: 28px;
+}
+
+.info-card h3 {
+    margin-bottom: 20px;
+
+    text-align: center;
+    font-size: 25px;
+    color: #3b2027;
+}
+
+.info-card p {
+    font-size: 17px;
+    line-height: 1.55;
+
+    color: #4d3a3f;
+}
+
+.ubicacion {
+    margin-top: 20px;
+}
+
+.info-final {
+    margin-top: 35px;
+
+    font-size: 25px;
+    font-style: italic;
+
+    color: #a75f70;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 900px) {
+
+    .info-importante {
+        padding: 60px 20px 0;
+
+        flex-direction: column-reverse;
+    }
+
+    .info-contenido {
+        width: 100%;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .info-mama {
+        width: 100%;
+
+        margin-top: 30px;
+    }
+
+    .info-mama img {
+        max-width: 330px;
+    }
+
+    .info-card {
+        padding: 25px 22px;
+    }
+}
+
+
+/* =========================
+   INFORMACIÓN IMPORTANTE - LETRA MÁS MARCADA
+========================= */
+
+.info-importante {
+    font-weight: 500;
+}
+
+.info-importante h2,
+.info-importante h3 {
+    font-weight: 700;
+}
+
+.info-importante p {
+    font-weight: 600;
+}
+
+
+/* =========================
+   TEXTO MÁS FUERTE
+========================= */
+
+.info-importante h2,
+.info-importante .subtitulo,
+.gracias,
+.gracias-por-ser-parte {
+    color: #6f2944 !important;
+    opacity: 1 !important;
+    font-weight: 700 !important;
+}
+
+
+/* =========================
+   TEXTOS INFO - MÁS VISIBLES
+========================= */
+
+/* Información importante */
+.info-importante .info-contenido h2 {
+    color: #6f2944 !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+}
+
+/* Todo lo que necesitás saber... */
+.info-importante .info-subtitulo {
+    color: #6f2944 !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+}
+
+/* Gracias por ser parte ♡ */
+.info-importante .info-final {
+    color: #6f2944 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+}
+
