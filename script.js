@@ -292,13 +292,21 @@ botonesVerMas.forEach((boton) => {
         if (info.classList.contains("activa")) {
 
             boton.innerHTML =
-                'Ver menos <span class="dedito dedito-arriba">👆</span>';
+                'Ver menos <span class="dedito dedito-arriba">☝️</span>';
+
+            setTimeout(() => {
+
+                info.classList.remove("activa");
+
+                boton.innerHTML =
+                    'Ver más <span class="dedito">👇</span>';
+
+            }, 8000);
 
         } else {
 
             boton.innerHTML =
                 'Ver más <span class="dedito">👇</span>';
-
         }
 
     });
