@@ -1626,3 +1626,150 @@ mientras se recorre toda esta zona.
     opacity: 1 !important;
 }
 
+/* =========================
+   BUSCADOR Y CATEGORÍAS
+========================= */
+
+.filtros-catalogo {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 35px;
+    padding: 0 15px;
+}
+
+
+/* BUSCADOR */
+
+.buscador-tortas {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto 22px;
+    padding: 14px 20px;
+
+    background: white;
+    border: 2px solid #ead4da;
+    border-radius: 30px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+    transition: 0.3s;
+}
+
+.buscador-tortas:focus-within {
+    border-color: #d98fa3;
+    box-shadow: 0 8px 30px rgba(217, 143, 163, 0.20);
+}
+
+.buscador-tortas span {
+    font-size: 20px;
+}
+
+.buscador-tortas input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 17px;
+    color: #333;
+}
+
+.buscador-tortas input::placeholder {
+    color: #999;
+}
+
+
+/* BOTONES DE CATEGORÍAS */
+
+.categorias-tortas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.categoria-btn {
+    border: 1px solid #d98fa3;
+
+    background: white;
+    color: #9f5267;
+
+    padding: 10px 18px;
+
+    border-radius: 25px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.categoria-btn:hover {
+    background: #fceef2;
+    transform: translateY(-2px);
+}
+
+.categoria-btn.activo {
+    background: #d98fa3;
+    color: white;
+
+    box-shadow: 0 5px 15px rgba(217, 143, 163, 0.35);
+}
+
+
+/* SIN RESULTADOS */
+
+#sin-resultados {
+    display: none;
+
+    margin-top: 30px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #777;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    .buscador-tortas {
+        padding: 12px 16px;
+    }
+
+    .categorias-tortas {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding-bottom: 8px;
+
+        scrollbar-width: none;
+    }
+
+    .categorias-tortas::-webkit-scrollbar {
+        display: none;
+    }
+
+    .categoria-btn {
+        flex-shrink: 0;
+
+        padding: 9px 15px;
+
+        font-size: 14px;
+    }
+}
+

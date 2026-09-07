@@ -96,10 +96,69 @@
 
     <h2>Nuestras delicias</h2>
 
+    <div class="filtros-catalogo">
+
+    <div class="buscador-tortas">
+        <span>🔍</span>
+
+        <input
+            type="text"
+            id="buscador-tortas"
+            placeholder="Buscar torta..."
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="categorias-tortas">
+
+        <button class="categoria-btn activo" data-categoria="todas">
+            Todas
+        </button>
+
+        <button class="categoria-btn" data-categoria="number-cake">
+            Number Cakes
+        </button>
+
+        <button class="categoria-btn" data-categoria="Letter-Cakes">
+    Letter-Cakes
+</button>
+
+<button class="categoria-btn" data-categoria="Shots">
+    Shots
+</button>
+
+<button class="categoria-btn" data-categoria="Petit">
+    Petit Fours
+</button>
+
+        <button class="categoria-btn" data-categoria="Mousse">
+            Mousse
+        </button>
+
+        <button class="categoria-btn" data-categoria="marquise">
+            Marquise
+        </button>
+
+        <button class="categoria-btn" data-categoria="cheesecake">
+            Cheesecakes
+        </button>
+
+        <button class="categoria-btn" data-categoria="torta">
+            Tortas
+        </button>
+
+    </div>
+
+    <p id="sin-resultados">
+        No encontramos una torta con ese nombre 😢
+    </p>
+
+</div>
+
     <div class="productos">
 
         <!-- 1 - MARQUISE 4X4 -->
-        <article class="producto">
+        <article class="producto" data-categoria="marquise">
             <img src="imagenes/marquise4x4.png" alt="Torta Marquise 4x4" loading="lazy">
 
             <h3>Marquise 4x4</h3>
@@ -149,7 +208,7 @@
 
 
         <!-- 2 - FRUTILLA CON CREMA -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/frutillaconcrema.png" alt="Frutilla con crema" loading="lazy">
 
             <h3>Frutilla con crema</h3>
@@ -195,7 +254,7 @@
 
 
         <!-- 3 - MARQUISE FRUTOS ROJOS -->
-        <article class="producto">
+        <article class="producto" data-categoria="marquise">
             <img src="imagenes/marquisconfrutosrojos.png" alt="Marquise con frutos rojos" loading="lazy">
 
             <h3>Marquise con frutos rojos</h3>
@@ -248,7 +307,7 @@
         <!-- =========================
      BOMBA OREO
 ========================= -->
-<article class="producto">
+<article class="producto" data-categoria="Torta">
 
     <img src="imagenes/bombaoreo.png"
          alt="Bomba Oreo"
@@ -328,7 +387,7 @@
 <!-- =========================
      TORTA BOMBÓN / CABSHA
 ========================= -->
-<article class="producto">
+<article class="producto" data-categoria="Torta">
 
     <img src="imagenes/cabsha.png"
          alt="Torta Bombón Cabsha"
@@ -390,7 +449,7 @@
      MARQUISE CON MOUSSE, FRANUI
      Y CHOCOLATE EN RAMA
 ========================= -->
-<article class="producto">
+<article class="producto" data-categoria="marquise">
 
     <img src="imagenes/marquise.png"
          alt="Marquise con mousse, Franui y chocolate en rama"
@@ -455,7 +514,7 @@
 
 
         <!-- 4 - LEMON PIE -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/lemonpie.png" alt="Lemon pie" loading="lazy">
 
             <h3>Lemon pie</h3>
@@ -497,7 +556,7 @@
 
 
         <!-- 5 - FERRERO -->
-        <article class="producto">
+        <article class="producto" data-categoria="Mousse">
             <img src="imagenes/ferrero.png" alt="Ferrero" loading="lazy">
 
             <h3>Ferrero</h3>
@@ -549,7 +608,7 @@
 
 
         <!-- 6 - TORTA HELADA -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/tortahelada.png" alt="Torta Oreo helada" loading="lazy">
 
             <h3>Torta helada</h3>
@@ -614,7 +673,7 @@
 
 
         <!-- 7 - CHEESECAKE NEW YORK -->
-        <article class="producto">
+        <article class="producto" data-categoria="cheesecake">
             <img src="imagenes/cheesecakenewyork.png" alt="Cheesecake New York" loading="lazy">
 
             <h3>Cheesecake New York</h3>
@@ -660,7 +719,7 @@
 
 
         <!-- 8 - NUMERO 30 -->
-<article class="producto">
+<article class="producto" data-categoria="number-cake">
     <div class="galeria-producto">
 
     <button class="flecha flecha-izquierda" type="button">❮</button>
@@ -749,7 +808,7 @@
 </article>
 
 <!-- 8 - LETRAS  -->
-<article class="producto">
+<article class="producto" data-categoria="Letter-Cakes">
     <div class="galeria-producto">
 
     <button class="flecha flecha-izquierda" type="button">❮</button>
@@ -836,7 +895,7 @@
 
 
         <!-- 9 - BALCARCE -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/balcarce.png" alt="Balcarce" loading="lazy">
 
             <h3>Balcarce</h3>
@@ -889,7 +948,7 @@
 
 
         <!-- 10 - CHEESECAKE MARACUYÁ -->
-        <article class="producto">
+        <article class="producto" data-categoria="cheesecake">
             <img src="imagenes/Cheesecakemaracuyá.png" alt="Cheesecake maracuyá" loading="lazy">
 
             <h3>Cheesecake maracuyá</h3>
@@ -938,7 +997,7 @@
 
 
         <!-- 11 - SELVA NEGRA -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/selvanegra.png" alt="Selva Negra" loading="lazy">
 
             <h3>Selva Negra</h3>
@@ -992,7 +1051,7 @@
         
 
         <!-- 13 - CHAJÁ -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/chajá.png" alt="Chajá" loading="lazy">
 
             <h3>Chajá</h3>
@@ -1046,7 +1105,7 @@
 
 
         <!-- 14 - BROWNIE CORAZÓN -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/Browniecorazón.png" alt="Brownie corazón" loading="lazy">
 
             <h3>Brownie corazón</h3>
@@ -1097,7 +1156,7 @@
 
 
         <!-- 15 - SHOTS -->
-        <article class="producto">
+        <article class="producto" data-categoria="Shots">
             <img src="imagenes/Shotsde100ccxdocen.png" alt="Shots de 100cc por docena" loading="lazy">
 
             <h3>Shots de 100cc por docena</h3>
@@ -1142,7 +1201,7 @@
 
 
 <!-- 16 - PETIT FOUR -->
-<article class="producto">
+<article class="producto" data-categoria="Petit">
 
     <img src="imagenes/petit.png"
          alt="Petit Four"
@@ -1210,7 +1269,7 @@
 <!-- 17 - BOMBA BANANA -->
 
         <!-- 16 - BOMBA BANANA -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/banana.png" alt="Bomba de banana" loading="lazy">
 
             <h3>Bomba de banana</h3>
@@ -1262,7 +1321,7 @@
 
 
         <!-- 17 - ROGEL -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/rogel.png" alt="Rogel" loading="lazy">
 
             <h3>Rogel</h3>
@@ -1309,7 +1368,7 @@
 
 
         <!-- 18 - PAVLOVA -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/pavlova.png" alt="Pavlova" loading="lazy">
 
             <h3>Pavlova</h3>
@@ -1360,7 +1419,7 @@
 
 
         <!-- 19 - TARTA DE LIMA -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/tartadelima.png" alt="Tarta de lima" loading="lazy">
 
             <h3>Tarta de lima</h3>
@@ -1412,7 +1471,7 @@
 
 
         <!-- 20 - SNICKER -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/TortaSnicker.png" alt="Torta Snicker" loading="lazy">
 
             <h3>Torta Snicker</h3>
@@ -1464,7 +1523,7 @@
 
 
         <!-- 21 - TIRAMISU -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/tiramisu.png" alt="Tiramisú" loading="lazy">
 
             <h3>Tiramisú</h3>
@@ -1511,7 +1570,7 @@
 
 
         <!-- 22 - CARROT CAKE -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/carrotcake.png" alt="Carrot Cake" loading="lazy">
 
             <h3>Carrot Cake</h3>
@@ -1563,7 +1622,7 @@
 
 
         <!-- 23 - MANZANA CON CRUMBLE -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/Manzanaconcrumble.png" alt="Manzana con crumble" loading="lazy">
 
             <h3>Manzana con crumble</h3>
@@ -1604,7 +1663,7 @@
 
 
         <!-- 24 - COCO Y DULCE DE LECHE -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/Tortadecocoydulcedeleche.png" alt="Torta de coco y dulce de leche" loading="lazy">
 
             <h3>Torta de coco y dulce de leche</h3>
@@ -1656,7 +1715,7 @@
 
 
         <!-- 25 - TRES LECHES -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/Tortatresleches.png" alt="Torta tres leches" loading="lazy">
 
             <h3>Torta tres leches</h3>
@@ -1697,7 +1756,7 @@
 
 
         <!-- 26 - MINI TORTAS -->
-        <article class="producto">
+        <article class="producto" data-categoria="Tortas">
             <img src="imagenes/minitortas.png" alt="Mini tortas" loading="lazy">
 
             <h3>Mini tortas</h3>
@@ -1746,7 +1805,7 @@
 
 
         <!-- 27 - MOUSSE DOS CHOCOLATES -->
-        <article class="producto">
+        <article class="producto" data-categoria="Mousse">
             <img src="imagenes/Moussededoschocolates.png" alt="Mousse de dos chocolates" loading="lazy">
 
             <h3>Mousse de dos chocolates</h3>
@@ -1799,7 +1858,7 @@
 
 
         <!-- 28 - ESPRESSO -->
-        <article class="producto">
+        <article class="producto" data-categoria="Mousse">
             <img src="imagenes/Espresso.png" alt="Espresso" loading="lazy">
 
             <h3>Espresso</h3>
@@ -1851,7 +1910,7 @@
 
 
         <!-- 29 - MARROC -->
-        <article class="producto">
+        <article class="producto" data-categoria="Mousse">
             <img src="imagenes/TortaMARROC.png" alt="Torta MARROC" loading="lazy">
 
             <h3>Torta MARROC</h3>
@@ -1903,7 +1962,7 @@
 
 
         <!-- 30 - FRAMBUESA -->
-        <article class="producto">
+        <article class="producto" data-categoria="torta">
             <img src="imagenes/Frambuesa.png" alt="Frambuesa" loading="lazy">
 
             <h3>Frambuesa</h3>
@@ -1955,7 +2014,7 @@
 
 
         <!-- 31 - CHOCOTORTA -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/chocotorta.png" alt="Chocotorta" loading="lazy">
 
             <h3>Chocotorta</h3>
@@ -2015,7 +2074,7 @@
 
 
         <!-- 32 - BROWNIE -->
-        <article class="producto">
+        <article class="producto" data-categoria="Torta">
             <img src="imagenes/brownie.png" alt="Brownie" loading="lazy">
 
             <h3>Brownie</h3>
@@ -2517,4 +2576,93 @@
     <script src="script.js"></script>
 
 </body>
+<script>
+
+const buscadorTortas = document.getElementById("buscador-tortas");
+const botonesCategorias = document.querySelectorAll(".categoria-btn");
+const productosTortas = document.querySelectorAll(".producto");
+const sinResultados = document.getElementById("sin-resultados");
+
+let categoriaSeleccionada = "todas";
+
+
+function filtrarTortas() {
+
+    const textoBusqueda = buscadorTortas.value
+        .toLowerCase()
+        .trim();
+
+    let cantidadVisibles = 0;
+
+
+    productosTortas.forEach(producto => {
+
+        const categoriaProducto = producto.dataset.categoria || "";
+
+        const textoProducto = producto.innerText.toLowerCase();
+
+
+        const coincideCategoria =
+            categoriaSeleccionada === "todas" ||
+            categoriaProducto === categoriaSeleccionada;
+
+
+        const coincideBusqueda =
+            textoProducto.includes(textoBusqueda);
+
+
+        if (coincideCategoria && coincideBusqueda) {
+
+            producto.style.display = "";
+
+            cantidadVisibles++;
+
+        } else {
+
+            producto.style.display = "none";
+
+        }
+
+    });
+
+
+    if (cantidadVisibles === 0) {
+
+        sinResultados.style.display = "block";
+
+    } else {
+
+        sinResultados.style.display = "none";
+
+    }
+
+}
+
+
+/* BUSCADOR */
+
+buscadorTortas.addEventListener("input", filtrarTortas);
+
+
+/* CATEGORÍAS */
+
+botonesCategorias.forEach(boton => {
+
+    boton.addEventListener("click", () => {
+
+        botonesCategorias.forEach(btn => {
+            btn.classList.remove("activo");
+        });
+
+        boton.classList.add("activo");
+
+        categoriaSeleccionada = boton.dataset.categoria;
+
+        filtrarTortas();
+
+    });
+
+});
+
+</script>
 </html>
