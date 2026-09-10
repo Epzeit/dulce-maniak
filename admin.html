@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel Dulce Maniak</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <header class="admin-header">
+        <h1>🍰 Dulce Maniak</h1>
+        <p>Panel de administración</p>
+    </header>
+
+
+    <!-- =========================
+         INICIO DE SESIÓN
+    ========================== -->
+
+    <section id="login-admin" class="admin-contenedor">
+
+        <div class="admin-card">
+
+            <h2>Ingresar al panel</h2>
+
+            <label for="admin-email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="admin-email"
+                placeholder="tu@email.com"
+            >
+
+            <label for="admin-password">
+                Contraseña
+            </label>
+
+            <input
+                type="password"
+                id="admin-password"
+                placeholder="Contraseña"
+            >
+
+            <button
+                type="button"
+                id="boton-login"
+            >
+                Ingresar
+            </button>
+
+            <p id="mensaje-login"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PANEL DE PRODUCTOS
+    ========================== -->
+
+    <main
+        id="panel-admin"
+        class="admin-contenedor"
+        style="display: none;"
+    >
+
+        <div style="width: 100%; margin-bottom: 25px;">
+
+            <button
+                type="button"
+                id="boton-cerrar-sesion"
+            >
+                Cerrar sesión
+            </button>
+
+        </div>
+
+
+        <section style="width: 100%;">
+
+            <h2>
+                Productos
+            </h2>
+
+            <p>
+                Modificá los precios y presioná
+                <strong>Guardar cambios</strong>.
+            </p>
+
+        </section>
+
+
+        <!-- ACÁ SE CARGAN AUTOMÁTICAMENTE
+             LOS PRODUCTOS DE SUPABASE -->
+
+        <div id="lista-productos"></div>
+
+
+        <p id="mensaje-panel"></p>
+
+    </main>
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

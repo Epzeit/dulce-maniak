@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff7f9;
+    color: #333;
+}
+
+.admin-header {
+    background: #301212;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.admin-header p {
+    margin: 8px 0 0;
+    color: #f5dce2;
+}
+
+.admin-contenedor {
+    width: min(900px, 92%);
+    margin: 40px auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.admin-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    text-align: left;
+}
+
+.admin-card h2 {
+    color: #301212;
+    margin-top: 0;
+}
+
+.admin-card label {
+    display: block;
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.admin-card input[type="number"] {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    font-size: 17px;
+
+    margin-bottom: 18px;
+}
+
+.disponibilidad {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.admin-card button {
+    width: 100%;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #d98fa3;
+    color: white;
+
+    padding: 14px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.admin-card button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}

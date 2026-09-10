@@ -301,7 +301,7 @@ botonesVerMas.forEach((boton) => {
                 boton.innerHTML =
                     'Ver más <span class="dedito">👇</span>';
 
-            }, 8000);
+            }, 15000);
 
         } else {
 
@@ -397,3 +397,206 @@ document.querySelectorAll(".galeria-producto").forEach(galeria => {
     });
 
 });
+
+// ==========================================
+// PRECIOS DESDE SUPABASE
+// ==========================================
+
+// Usamos los mismos datos que en admin.js
+
+const SUPABASE_URL_PUBLICA =
+    "https://isaqiccpchonggltggkc.supabase.co";
+
+const SUPABASE_KEY_PUBLICA =
+    "sb_publishable_DO00T8_uGL2TYIwVouQPYw_d7WnqfnA";
+
+
+// Crear conexión para la página pública
+
+const supabasePublico =
+    window.supabase.createClient(
+        SUPABASE_URL_PUBLICA,
+        SUPABASE_KEY_PUBLICA
+    );
+
+
+// ==========================================
+// FORMATEAR PRECIO ARGENTINO
+// ==========================================
+
+function formatearPrecioWeb(precio) {
+
+    if (
+        precio === null ||
+        precio === undefined
+    ) {
+        return "";
+    }
+
+    return "$" +
+        new Intl.NumberFormat("es-AR")
+            .format(precio);
+}
+
+
+// ==========================================
+// CARGAR PRECIOS DESDE SUPABASE
+// ==========================================
+
+async function cargarPreciosProductos() {
+
+    const {
+        data: productos,
+        error
+    } =
+        await supabasePublico
+            .from("productos")
+            .select(
+                "nombre, disponible, precio_chica, precio_mediana, precio_grande, precio_unico"
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Error cargando precios:",
+            error
+        );
+
+        return;
+    }
+
+
+    const tarjetas =
+        document.querySelectorAll(".producto");
+
+
+    productos.forEach(function (productoSupabase) {
+
+        tarjetas.forEach(function (tarjeta) {
+
+            const titulo =
+                tarjeta.querySelector("h3");
+
+            if (!titulo) {
+                return;
+            }
+
+
+            const nombreHTML =
+                titulo.textContent
+                    .trim()
+                    .toLowerCase();
+
+            const nombreSupabase =
+                productoSupabase.nombre
+                    .trim()
+                    .toLowerCase();
+
+
+            if (nombreHTML !== nombreSupabase) {
+                return;
+            }
+
+
+            const parrafos =
+                tarjeta.querySelectorAll(
+                    ".info-producto p"
+                );
+
+
+            parrafos.forEach(function (parrafo) {
+
+                const texto =
+                    parrafo.textContent
+                        .toLowerCase();
+
+                const precio =
+                    parrafo.querySelector(
+                        ".precio"
+                    );
+
+
+                if (!precio) {
+                    return;
+                }
+
+
+                // GRANDE
+
+                if (
+                    texto.includes("grande") &&
+                    productoSupabase.precio_grande !== null
+                ) {
+
+                    precio.textContent =
+                        formatearPrecioWeb(
+                            productoSupabase.precio_grande
+                        );
+
+                }
+
+
+                // MEDIANA
+
+                if (
+                    texto.includes("mediana") &&
+                    productoSupabase.precio_mediana !== null
+                ) {
+
+                    precio.textContent =
+                        formatearPrecioWeb(
+                            productoSupabase.precio_mediana
+                        );
+
+                }
+
+
+                                // CHICA
+
+                if (
+                    texto.includes("chica") &&
+                    productoSupabase.precio_chica !== null
+                ) {
+
+                    precio.textContent =
+                        formatearPrecioWeb(
+                            productoSupabase.precio_chica
+                        );
+
+                }
+
+            });
+
+
+            // ==========================================
+// PRECIO ÚNICO
+// ==========================================
+
+if (productoSupabase.precio_unico !== null) {
+
+    const precioUnico =
+        tarjeta.querySelector(
+            ".info-producto .detalle-tamano .precio"
+        );
+
+    if (precioUnico) {
+
+        precioUnico.textContent =
+            formatearPrecioWeb(
+                productoSupabase.precio_unico
+            );
+
+    }
+
+}
+        });
+
+    });
+
+}
+
+
+// Ejecutar al abrir la página
+
+cargarPreciosProductos();
