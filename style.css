@@ -1773,3 +1773,83 @@ mientras se recorre toda esta zona.
     }
 }
 
+.producto.no-disponible {
+    opacity: 0.7;
+}
+
+.producto-no-disponible {
+    font-weight: bold;
+    margin: 8px 0 12px;
+}
+
+.producto {
+    position: relative;
+}
+
+.producto.no-disponible {
+    opacity: 0.72;
+}
+
+.cinta-agotado {
+    position: absolute;
+    top: 18px;
+    right: -42px;
+
+    width: 180px;
+
+    padding: 8px 0;
+
+    text-align: center;
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    background: rgba(48, 18, 18, 0.95);
+    color: white;
+
+    transform: rotate(40deg);
+
+    z-index: 20;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.producto.no-disponible .boton-whatsapp {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* =========================
+   PRECIO PORCIONES
+========================= */
+
+.precio-porciones {
+    margin: 20px 0;
+    padding: 15px 18px;
+
+    background: rgba(217, 143, 163, 0.12);
+    border: 1px solid rgba(217, 143, 163, 0.35);
+    border-radius: 16px;
+
+    text-align: center;
+}
+
+.precio-porciones span {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #d98fa3;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.precio-porciones strong {
+    display: block;
+    margin: 6px 0;
+
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 900;
+}
+

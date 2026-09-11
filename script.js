@@ -402,8 +402,6 @@ document.querySelectorAll(".galeria-producto").forEach(galeria => {
 // PRECIOS DESDE SUPABASE
 // ==========================================
 
-// Usamos los mismos datos que en admin.js
-
 const SUPABASE_URL_PUBLICA =
     "https://isaqiccpchonggltggkc.supabase.co";
 
@@ -440,6 +438,20 @@ function formatearPrecioWeb(precio) {
 
 
 // ==========================================
+// NORMALIZAR NOMBRES
+// ==========================================
+
+function normalizarTexto(texto) {
+
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
+
+// ==========================================
 // CARGAR PRECIOS DESDE SUPABASE
 // ==========================================
 
@@ -459,7 +471,7 @@ async function cargarPreciosProductos() {
     if (error) {
 
         console.error(
-            "Error cargando precios:",
+            "Error cargando precios desde Supabase:",
             error
         );
 
@@ -468,7 +480,9 @@ async function cargarPreciosProductos() {
 
 
     const tarjetas =
-        document.querySelectorAll(".producto");
+        document.querySelectorAll(
+            "#catalogo .producto"
+        );
 
 
     productos.forEach(function (productoSupabase) {
@@ -484,54 +498,121 @@ async function cargarPreciosProductos() {
 
 
             const nombreHTML =
-                titulo.textContent
-                    .trim()
-                    .toLowerCase();
+                normalizarTexto(
+                    titulo.textContent
+                );
 
             const nombreSupabase =
-                productoSupabase.nombre
-                    .trim()
-                    .toLowerCase();
+                normalizarTexto(
+                    productoSupabase.nombre
+                );
 
+
+            // Si no es el mismo producto, seguimos
 
             if (nombreHTML !== nombreSupabase) {
                 return;
             }
 
 
-            const parrafos =
+            // ==========================================
+// DISPONIBILIDAD DEL PRODUCTO
+// ==========================================
+
+const botonWhatsApp =
+    tarjeta.querySelector(".boton-whatsapp");
+
+let avisoNoDisponible =
+    tarjeta.querySelector(".producto-no-disponible");
+
+
+if (productoSupabase.disponible === false) {
+
+    tarjeta.classList.add("no-disponible");
+
+    if (botonWhatsApp) {
+        botonWhatsApp.style.pointerEvents = "none";
+        botonWhatsApp.textContent = "No disponible";
+    }
+
+    let cinta =
+        tarjeta.querySelector(".cinta-agotado");
+
+    if (!cinta) {
+
+        cinta =
+            document.createElement("div");
+
+        cinta.className =
+            "cinta-agotado";
+
+        cinta.textContent =
+            "NO DISPONIBLE";
+
+        tarjeta.appendChild(cinta);
+    }
+
+} else {
+
+    tarjeta.classList.remove("no-disponible");
+
+    if (botonWhatsApp) {
+        botonWhatsApp.style.pointerEvents = "";
+        botonWhatsApp.textContent = "Consultar";
+    }
+
+    const cinta =
+        tarjeta.querySelector(".cinta-agotado");
+
+    if (cinta) {
+        cinta.remove();
+    }
+
+}
+
+            // ==========================================
+            // PRECIOS CHICA / MEDIANA / GRANDE
+            // ==========================================
+
+            const bloquesTamanos =
                 tarjeta.querySelectorAll(
-                    ".info-producto p"
+                    ".detalle-tamano"
                 );
 
 
-            parrafos.forEach(function (parrafo) {
+            bloquesTamanos.forEach(function (bloque) {
 
-                const texto =
-                    parrafo.textContent
-                        .toLowerCase();
+                const nombreTamano =
+                    bloque.querySelector("strong");
 
-                const precio =
-                    parrafo.querySelector(
-                        ".precio"
-                    );
+                const elementoPrecio =
+                    bloque.querySelector(".precio");
 
 
-                if (!precio) {
+                if (
+                    !nombreTamano ||
+                    !elementoPrecio
+                ) {
                     return;
                 }
 
 
-                // GRANDE
+                const tamano =
+                    normalizarTexto(
+                        nombreTamano.textContent
+                    );
+
+
+                // CHICA
 
                 if (
-                    texto.includes("grande") &&
-                    productoSupabase.precio_grande !== null
+                    tamano.includes("chica") &&
+                    productoSupabase.precio_chica !== null
                 ) {
 
-                    precio.textContent =
+                    elementoPrecio.textContent =
                         formatearPrecioWeb(
-                            productoSupabase.precio_grande
+                            productoSupabase.precio_chica
                         );
 
                 }
@@ -540,11 +621,11 @@ async function cargarPreciosProductos() {
                 // MEDIANA
 
                 if (
-                    texto.includes("mediana") &&
+                    tamano.includes("mediana") &&
                     productoSupabase.precio_mediana !== null
                 ) {
 
-                    precio.textContent =
+                    elementoPrecio.textContent =
                         formatearPrecioWeb(
                             productoSupabase.precio_mediana
                         );
@@ -552,16 +633,16 @@ async function cargarPreciosProductos() {
                 }
 
 
-                                // CHICA
+                // GRANDE
 
                 if (
-                    texto.includes("chica") &&
-                    productoSupabase.precio_chica !== null
+                    tamano.includes("grande") &&
+                    productoSupabase.precio_grande !== null
                 ) {
 
-                    precio.textContent =
+                    elementoPrecio.textContent =
                         formatearPrecioWeb(
-                            productoSupabase.precio_chica
+                            productoSupabase.precio_grande
                         );
 
                 }
@@ -570,26 +651,30 @@ async function cargarPreciosProductos() {
 
 
             // ==========================================
-// PRECIO ÚNICO
-// ==========================================
+            // PRECIO ÚNICO
+            // ==========================================
 
-if (productoSupabase.precio_unico !== null) {
+            if (
+                productoSupabase.precio_unico !== null
+            ) {
 
-    const precioUnico =
-        tarjeta.querySelector(
-            ".info-producto .detalle-tamano .precio"
-        );
+                const precioUnico =
+                    tarjeta.querySelector(
+                        ".detalle-tamano .precio"
+                    );
 
-    if (precioUnico) {
 
-        precioUnico.textContent =
-            formatearPrecioWeb(
-                productoSupabase.precio_unico
-            );
+                if (precioUnico) {
 
-    }
+                    precioUnico.textContent =
+                        formatearPrecioWeb(
+                            productoSupabase.precio_unico
+                        );
 
-}
+                }
+
+            }
+
         });
 
     });
@@ -597,6 +682,6 @@ if (productoSupabase.precio_unico !== null) {
 }
 
 
-// Ejecutar al abrir la página
+// Ejecutar cuando abre la página
 
 cargarPreciosProductos();
