@@ -447,7 +447,9 @@ function normalizarTexto(texto) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
         .trim();
+
 }
 
 
@@ -813,3 +815,170 @@ async function cargarPreciosProductos() {
 // Ejecutar cuando abre la página
 
 cargarPreciosProductos();
+
+// ==========================================
+// CATÁLOGO INICIAL - 5 DESTACADAS
+// ==========================================
+
+const productosCatalogo =
+    document.querySelectorAll("#catalogo .producto");
+
+const botonCatalogoCompleto =
+    document.getElementById("ver-catalogo-completo");
+
+const buscadorCatalogo =
+    document.getElementById("buscador-tortas");
+
+const categoriasCatalogo =
+    document.querySelectorAll(".categoria-btn");
+
+
+// NOMBRES DE LAS 5 TORTAS DESTACADAS
+const tortasDestacadas = [
+
+    // KEY LIME PIE
+    [
+        "key lime pie",
+        "cheeslimepie",
+        "cheesecake lime pie"
+    ],
+
+    // MARQUISE CON FRANUI
+    [
+        "marquise con franui"
+    ],
+
+    // CHEESECAKE NEW YORK
+    [
+        "cheesecake new york"
+    ],
+
+    // ROGEL
+    [
+        "rogel"
+    ],
+
+    // TIRAMISÚ
+    [
+        "tiramisu"
+    ]
+
+];
+
+
+// NORMALIZA TEXTO PARA QUE TIRAMISÚ / TIRAMISU
+// FUNCIONEN IGUAL
+function normalizarTexto(texto) {
+
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+
+}
+
+
+// MOSTRAR SOLAMENTE LAS 5 DESTACADAS
+function limitarCatalogoInicial() {
+
+    productosCatalogo.forEach(function (producto) {
+
+        const titulo =
+            producto.querySelector("h3");
+
+        if (!titulo) return;
+
+        const nombre =
+            normalizarTexto(titulo.textContent);
+
+        const esDestacada =
+    tortasDestacadas.some(function (grupo) {
+
+        return grupo.some(function (nombrePosible) {
+
+            return nombre ===
+                normalizarTexto(nombrePosible);
+
+        });
+
+    });
+
+
+        if (esDestacada) {
+
+            producto.classList.remove(
+                "catalogo-oculto"
+            );
+
+        } else {
+
+            producto.classList.add(
+                "catalogo-oculto"
+            );
+
+        }
+
+    });
+
+}
+
+
+// MOSTRAR CATÁLOGO COMPLETO
+function mostrarCatalogoCompleto() {
+
+    productosCatalogo.forEach(function (producto) {
+
+        producto.classList.remove(
+            "catalogo-oculto"
+        );
+
+    });
+
+
+    if (botonCatalogoCompleto) {
+
+        botonCatalogoCompleto
+            .parentElement
+            .style.display = "none";
+
+    }
+
+}
+
+
+// AL ABRIR LA WEB
+limitarCatalogoInicial();
+
+
+// BOTÓN VER CATÁLOGO COMPLETO
+if (botonCatalogoCompleto) {
+
+    botonCatalogoCompleto.addEventListener(
+        "click",
+        mostrarCatalogoCompleto
+    );
+
+}
+
+
+// AL BUSCAR, MOSTRAR TODO
+if (buscadorCatalogo) {
+
+    buscadorCatalogo.addEventListener(
+        "input",
+        mostrarCatalogoCompleto
+    );
+
+}
+
+
+// AL ELEGIR CATEGORÍA, MOSTRAR TODO
+categoriasCatalogo.forEach(function (boton) {
+
+    boton.addEventListener(
+        "click",
+        mostrarCatalogoCompleto
+    );
+
+});
