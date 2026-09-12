@@ -464,14 +464,14 @@ async function cargarPreciosProductos() {
         await supabasePublico
             .from("productos")
             .select(
-                "nombre, disponible, precio_chica, precio_mediana, precio_grande, precio_unico"
+                "nombre, tipo, disponible, precio_chica, precio_mediana, precio_grande, precio_unico"
             );
 
 
     if (error) {
 
         console.error(
-            "Error cargando precios desde Supabase:",
+            "Error cargando productos desde Supabase:",
             error
         );
 
@@ -479,205 +479,333 @@ async function cargarPreciosProductos() {
     }
 
 
-    const tarjetas =
+    // ==========================================
+    // FUNCIÓN PARA DISPONIBILIDAD
+    // ==========================================
+
+    function aplicarDisponibilidad(
+        tarjeta,
+        disponible
+    ) {
+
+        const botonWhatsApp =
+            tarjeta.querySelector(
+                ".boton-whatsapp"
+            );
+
+        let cinta =
+            tarjeta.querySelector(
+                ".cinta-agotado"
+            );
+
+
+        // NO DISPONIBLE
+
+        if (disponible === false) {
+
+            tarjeta.classList.add(
+                "no-disponible"
+            );
+
+
+            if (botonWhatsApp) {
+
+                botonWhatsApp.style.pointerEvents =
+                    "none";
+
+                botonWhatsApp.textContent =
+                    "No disponible";
+
+            }
+
+
+            if (!cinta) {
+
+                cinta =
+                    document.createElement(
+                        "div"
+                    );
+
+                cinta.className =
+                    "cinta-agotado";
+
+                cinta.textContent =
+                    "NO DISPONIBLE";
+
+                tarjeta.appendChild(
+                    cinta
+                );
+
+            }
+
+        }
+
+        // DISPONIBLE
+        else {
+
+            tarjeta.classList.remove(
+                "no-disponible"
+            );
+
+
+            if (botonWhatsApp) {
+
+                botonWhatsApp.style.pointerEvents =
+                    "";
+
+                botonWhatsApp.textContent =
+                    "Consultar";
+
+            }
+
+
+            if (cinta) {
+                cinta.remove();
+            }
+
+        }
+
+    }
+
+
+    // ==========================================
+    // PRODUCTOS / TORTAS
+    // ==========================================
+
+    const tarjetasProductos =
         document.querySelectorAll(
             "#catalogo .producto"
         );
 
 
-    productos.forEach(function (productoSupabase) {
+    productos
+        .filter(function (producto) {
 
-        tarjetas.forEach(function (tarjeta) {
+            return producto.tipo === "producto";
 
-            const titulo =
-                tarjeta.querySelector("h3");
-
-            if (!titulo) {
-                return;
-            }
+        })
+        .forEach(function (productoSupabase) {
 
 
-            const nombreHTML =
-                normalizarTexto(
-                    titulo.textContent
-                );
+            tarjetasProductos.forEach(
+                function (tarjeta) {
 
-            const nombreSupabase =
-                normalizarTexto(
-                    productoSupabase.nombre
-                );
+                    const titulo =
+                        tarjeta.querySelector(
+                            "h3"
+                        );
 
 
-            // Si no es el mismo producto, seguimos
-
-            if (nombreHTML !== nombreSupabase) {
-                return;
-            }
+                    if (!titulo) {
+                        return;
+                    }
 
 
-            // ==========================================
-// DISPONIBILIDAD DEL PRODUCTO
-// ==========================================
+                    const nombreHTML =
+                        normalizarTexto(
+                            titulo.textContent
+                        );
 
-const botonWhatsApp =
-    tarjeta.querySelector(".boton-whatsapp");
-
-let avisoNoDisponible =
-    tarjeta.querySelector(".producto-no-disponible");
-
-
-if (productoSupabase.disponible === false) {
-
-    tarjeta.classList.add("no-disponible");
-
-    if (botonWhatsApp) {
-        botonWhatsApp.style.pointerEvents = "none";
-        botonWhatsApp.textContent = "No disponible";
-    }
-
-    let cinta =
-        tarjeta.querySelector(".cinta-agotado");
-
-    if (!cinta) {
-
-        cinta =
-            document.createElement("div");
-
-        cinta.className =
-            "cinta-agotado";
-
-        cinta.textContent =
-            "NO DISPONIBLE";
-
-        tarjeta.appendChild(cinta);
-    }
-
-} else {
-
-    tarjeta.classList.remove("no-disponible");
-
-    if (botonWhatsApp) {
-        botonWhatsApp.style.pointerEvents = "";
-        botonWhatsApp.textContent = "Consultar";
-    }
-
-    const cinta =
-        tarjeta.querySelector(".cinta-agotado");
-
-    if (cinta) {
-        cinta.remove();
-    }
-
-}
-
-            // ==========================================
-            // PRECIOS CHICA / MEDIANA / GRANDE
-            // ==========================================
-
-            const bloquesTamanos =
-                tarjeta.querySelectorAll(
-                    ".detalle-tamano"
-                );
+                    const nombreSupabase =
+                        normalizarTexto(
+                            productoSupabase.nombre
+                        );
 
 
-            bloquesTamanos.forEach(function (bloque) {
-
-                const nombreTamano =
-                    bloque.querySelector("strong");
-
-                const elementoPrecio =
-                    bloque.querySelector(".precio");
-
-
-                if (
-                    !nombreTamano ||
-                    !elementoPrecio
-                ) {
-                    return;
-                }
+                    if (
+                        nombreHTML !==
+                        nombreSupabase
+                    ) {
+                        return;
+                    }
 
 
-                const tamano =
-                    normalizarTexto(
-                        nombreTamano.textContent
+                    // DISPONIBILIDAD
+
+                    aplicarDisponibilidad(
+                        tarjeta,
+                        productoSupabase.disponible
                     );
 
 
-                // CHICA
+                    // ==========================
+                    // PRECIOS
+                    // ==========================
 
-                if (
-                    tamano.includes("chica") &&
-                    productoSupabase.precio_chica !== null
-                ) {
-
-                    elementoPrecio.textContent =
-                        formatearPrecioWeb(
-                            productoSupabase.precio_chica
+                    const bloquesTamanos =
+                        tarjeta.querySelectorAll(
+                            ".detalle-tamano"
                         );
 
-                }
+
+                    bloquesTamanos.forEach(
+                        function (bloque) {
+
+                            const nombreTamano =
+                                bloque.querySelector(
+                                    "strong"
+                                );
+
+                            const elementoPrecio =
+                                bloque.querySelector(
+                                    ".precio"
+                                );
 
 
-                // MEDIANA
-
-                if (
-                    tamano.includes("mediana") &&
-                    productoSupabase.precio_mediana !== null
-                ) {
-
-                    elementoPrecio.textContent =
-                        formatearPrecioWeb(
-                            productoSupabase.precio_mediana
-                        );
-
-                }
+                            if (
+                                !nombreTamano ||
+                                !elementoPrecio
+                            ) {
+                                return;
+                            }
 
 
-                // GRANDE
-
-                if (
-                    tamano.includes("grande") &&
-                    productoSupabase.precio_grande !== null
-                ) {
-
-                    elementoPrecio.textContent =
-                        formatearPrecioWeb(
-                            productoSupabase.precio_grande
-                        );
-
-                }
-
-            });
+                            const tamano =
+                                normalizarTexto(
+                                    nombreTamano.textContent
+                                );
 
 
-            // ==========================================
-            // PRECIO ÚNICO
-            // ==========================================
+                            // CHICA
 
-            if (
-                productoSupabase.precio_unico !== null
-            ) {
+                            if (
+                                tamano.includes("chica") &&
+                                productoSupabase.precio_chica !== null
+                            ) {
 
-                const precioUnico =
-                    tarjeta.querySelector(
-                        ".detalle-tamano .precio"
+                                elementoPrecio.textContent =
+                                    formatearPrecioWeb(
+                                        productoSupabase.precio_chica
+                                    );
+
+                            }
+
+
+                            // MEDIANA
+
+                            if (
+                                tamano.includes("mediana") &&
+                                productoSupabase.precio_mediana !== null
+                            ) {
+
+                                elementoPrecio.textContent =
+                                    formatearPrecioWeb(
+                                        productoSupabase.precio_mediana
+                                    );
+
+                            }
+
+
+                            // GRANDE
+
+                            if (
+                                tamano.includes("grande") &&
+                                productoSupabase.precio_grande !== null
+                            ) {
+
+                                elementoPrecio.textContent =
+                                    formatearPrecioWeb(
+                                        productoSupabase.precio_grande
+                                    );
+
+                            }
+
+                        }
                     );
 
 
-                if (precioUnico) {
+                    // ==========================
+                    // PRECIO ÚNICO
+                    // ==========================
 
-                    precioUnico.textContent =
-                        formatearPrecioWeb(
-                            productoSupabase.precio_unico
-                        );
+                    if (
+                        productoSupabase.precio_unico !== null
+                    ) {
+
+                        const precioUnico =
+                            tarjeta.querySelector(
+                                ".detalle-tamano .precio"
+                            );
+
+
+                        if (precioUnico) {
+
+                            precioUnico.textContent =
+                                formatearPrecioWeb(
+                                    productoSupabase.precio_unico
+                                );
+
+                        }
+
+                    }
 
                 }
-
-            }
+            );
 
         });
 
-    });
+
+    // ==========================================
+    // PORCIONES
+    // ==========================================
+
+    const tarjetasPorciones =
+        document.querySelectorAll(
+            "#porciones .producto"
+        );
+
+
+    productos
+        .filter(function (producto) {
+
+            return producto.tipo === "porcion";
+
+        })
+        .forEach(function (porcionSupabase) {
+
+
+            tarjetasPorciones.forEach(
+                function (tarjeta) {
+
+                    const titulo =
+                        tarjeta.querySelector(
+                            "h3"
+                        );
+
+
+                    if (!titulo) {
+                        return;
+                    }
+
+
+                    const nombreHTML =
+                        normalizarTexto(
+                            titulo.textContent
+                        );
+
+                    const nombreSupabase =
+                        normalizarTexto(
+                            porcionSupabase.nombre
+                        );
+
+
+                    if (
+                        nombreHTML !==
+                        nombreSupabase
+                    ) {
+                        return;
+                    }
+
+
+                    aplicarDisponibilidad(
+                        tarjeta,
+                        porcionSupabase.disponible
+                    );
+
+                }
+            );
+
+        });
 
 }
 

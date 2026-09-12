@@ -25,7 +25,10 @@
          INICIO DE SESIÓN
     ========================== -->
 
-    <section id="login-admin" class="admin-contenedor">
+    <section
+        id="login-admin"
+        class="admin-contenedor"
+    >
 
         <div class="admin-card">
 
@@ -65,51 +68,131 @@
     </section>
 
 
-    <!-- =========================
-         PANEL DE PRODUCTOS
-    ========================== -->
-
     <main
-        id="panel-admin"
-        class="admin-contenedor"
-        style="display: none;"
-    >
+    id="panel-admin"
+    class="admin-contenedor"
+    style="display: none;"
+>
 
-        <div style="width: 100%; margin-bottom: 25px;">
+    <div class="admin-superior">
 
-            <button
-                type="button"
-                id="boton-cerrar-sesion"
-            >
-                Cerrar sesión
-            </button>
-
-        </div>
-
-
-        <section style="width: 100%;">
-
-            <h2>
-                Productos
-            </h2>
+        <div>
+            <h2>Administración</h2>
 
             <p>
-                Modificá los precios y presioná
-                <strong>Guardar cambios</strong>.
+                Modificá precios y disponibilidad de los
+                productos de Dulce Maniak.
             </p>
+        </div>
+
+        <button
+            type="button"
+            id="boton-cerrar-sesion"
+        >
+            Cerrar sesión
+        </button>
+
+    </div>
+
+<!-- =========================
+     BUSCADOR Y FILTROS
+========================= -->
+
+<section class="admin-filtros">
+
+    <div class="admin-buscador">
+
+        <span>🔍</span>
+
+        <input
+            type="text"
+            id="admin-buscador"
+            placeholder="Buscar producto o porción..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="admin-botones-filtro">
+
+        <button
+            type="button"
+            class="admin-filtro-btn activo"
+            data-filtro="todos"
+        >
+            Todos
+        </button>
+
+        <button
+            type="button"
+            class="admin-filtro-btn"
+            data-filtro="producto"
+        >
+            Productos
+        </button>
+
+        <button
+            type="button"
+            class="admin-filtro-btn"
+            data-filtro="porcion"
+        >
+            Porciones
+        </button>
+
+        <button
+            type="button"
+            class="admin-filtro-btn"
+            data-filtro="disponible"
+        >
+            Disponibles
+        </button>
+
+        <button
+            type="button"
+            class="admin-filtro-btn"
+            data-filtro="no-disponible"
+        >
+            No disponibles
+        </button>
+
+    </div>
+
+</section>
+
+    <div class="admin-secciones">
+
+        <!-- PRODUCTOS -->
+        <section class="admin-seccion productos-admin">
+
+            <div class="admin-titulo-seccion">
+                <h2>🍰 Productos</h2>
+                <p>Precios y disponibilidad.</p>
+            </div>
+
+            <div id="lista-productos"></div>
 
         </section>
 
 
-        <!-- ACÁ SE CARGAN AUTOMÁTICAMENTE
-             LOS PRODUCTOS DE SUPABASE -->
+        <!-- PORCIONES -->
+        <section class="admin-seccion porciones-admin">
 
-        <div id="lista-productos"></div>
+            <div class="admin-titulo-seccion">
+                <h2>🍰 Porciones</h2>
+                <p>Activá o desactivá las porciones disponibles.</p>
+            </div>
+
+            <div id="lista-porciones"></div>
+
+        </section>
+
+    </div>
 
 
-        <p id="mensaje-panel"></p>
+    <p id="mensaje-panel"></p>
 
-    </main>
+</main>
 
 
     <script src="admin.js"></script>

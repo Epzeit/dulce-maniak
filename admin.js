@@ -2,19 +2,18 @@
 // CONEXIÓN CON SUPABASE
 // ==========================================
 
-// PEGAR ACÁ LOS DATOS DE TU PROYECTO
+const SUPABASE_URL =
+    "https://isaqiccpchonggltggkc.supabase.co";
 
-const SUPABASE_URL = "https://isaqiccpchonggltggkc.supabase.co";
+const SUPABASE_KEY =
+    "sb_publishable_DO00T8_uGL2TYIwVouQPYw_d7WnqfnA";
 
-const SUPABASE_KEY = "sb_publishable_DO00T8_uGL2TYIwVouQPYw_d7WnqfnA";
 
-
-// Crear conexión
-
-const supabaseCliente = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const supabaseCliente =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
 // ==========================================
@@ -37,16 +36,42 @@ const botonLogin =
     document.getElementById("boton-login");
 
 const botonCerrarSesion =
-    document.getElementById("boton-cerrar-sesion");
+    document.getElementById(
+        "boton-cerrar-sesion"
+    );
 
 const mensajeLogin =
-    document.getElementById("mensaje-login");
+    document.getElementById(
+        "mensaje-login"
+    );
 
 const mensajePanel =
-    document.getElementById("mensaje-panel");
+    document.getElementById(
+        "mensaje-panel"
+    );
 
 const listaProductos =
-    document.getElementById("lista-productos");
+    document.getElementById(
+        "lista-productos"
+    );
+
+const listaPorciones =
+    document.getElementById(
+        "lista-porciones"
+    );
+
+    const adminBuscador =
+    document.getElementById(
+        "admin-buscador"
+    );
+
+const botonesFiltroAdmin =
+    document.querySelectorAll(
+        ".admin-filtro-btn"
+    );
+
+let filtroAdminActual =
+    "todos";
 
 
 // ==========================================
@@ -97,15 +122,16 @@ botonLogin.addEventListener(
 
 
         const {
-            data,
             error
         } =
-            await supabaseCliente.auth.signInWithPassword({
+            await supabaseCliente
+                .auth
+                .signInWithPassword({
 
-                email: email,
-                password: password
+                    email: email,
+                    password: password
 
-            });
+                });
 
 
         if (error) {
@@ -136,11 +162,15 @@ botonCerrarSesion.addEventListener(
     "click",
     async function () {
 
-        await supabaseCliente.auth.signOut();
+        await supabaseCliente
+            .auth
+            .signOut();
 
-        panelAdmin.style.display = "none";
+        panelAdmin.style.display =
+            "none";
 
-        loginAdmin.style.display = "";
+        loginAdmin.style.display =
+            "";
 
         passwordInput.value = "";
 
@@ -154,9 +184,11 @@ botonCerrarSesion.addEventListener(
 
 async function mostrarPanel() {
 
-    loginAdmin.style.display = "none";
+    loginAdmin.style.display =
+        "none";
 
-    panelAdmin.style.display = "";
+    panelAdmin.style.display =
+        "";
 
     await cargarProductos();
 
@@ -164,7 +196,7 @@ async function mostrarPanel() {
 
 
 // ==========================================
-// CARGAR PRODUCTOS DESDE SUPABASE
+// CARGAR TODO DESDE SUPABASE
 // ==========================================
 
 async function cargarProductos() {
@@ -173,6 +205,8 @@ async function cargarProductos() {
         "Cargando productos...";
 
     listaProductos.innerHTML = "";
+
+    listaPorciones.innerHTML = "";
 
 
     const {
@@ -184,8 +218,8 @@ async function cargarProductos() {
             .from("productos")
 
             .select(
-    "id, nombre, disponible, precio_chica, precio_mediana, precio_grande, precio_unico"
-)
+                "id, nombre, tipo, disponible, precio_chica, precio_mediana, precio_grande, precio_unico"
+            )
 
             .order(
                 "nombre",
@@ -210,26 +244,57 @@ async function cargarProductos() {
     mensajePanel.textContent = "";
 
 
-    productos.forEach(function (producto) {
+    productos.forEach(
+        function (producto) {
 
-        crearTarjetaProducto(producto);
+            if (
+                producto.tipo === "porcion"
+            ) {
 
-    });
+                crearTarjetaPorcion(
+                    producto
+                );
+
+            } else {
+
+                crearTarjetaProducto(
+                    producto
+                );
+
+            }
+
+        }
+    );
 
 }
 
 
 // ==========================================
-// CREAR TARJETA DEL PRODUCTO
+// CREAR TARJETA PRODUCTO
 // ==========================================
 
-function crearTarjetaProducto(producto) {
+function crearTarjetaProducto(
+    producto
+) {
 
     const tarjeta =
-        document.createElement("section");
+        document.createElement(
+            "section"
+        );
 
     tarjeta.className =
         "admin-card";
+
+        tarjeta.dataset.nombre =
+    producto.nombre.toLowerCase();
+
+tarjeta.dataset.tipo =
+    "producto";
+
+tarjeta.dataset.disponible =
+    producto.disponible
+        ? "true"
+        : "false";
 
 
     tarjeta.innerHTML = `
@@ -276,15 +341,15 @@ function crearTarjetaProducto(producto) {
 
 
         <label>
-    Precio único
-</label>
+            Precio único
+        </label>
 
-<input
-    type="number"
-    id="unico-${producto.id}"
-    value="${formatearPrecio(producto.precio_unico)}"
-    placeholder="Precio único"
->
+        <input
+            type="number"
+            id="unico-${producto.id}"
+            value="${formatearPrecio(producto.precio_unico)}"
+            placeholder="Precio único"
+        >
 
 
         <label class="disponibilidad">
@@ -315,7 +380,79 @@ function crearTarjetaProducto(producto) {
     `;
 
 
-    listaProductos.appendChild(tarjeta);
+    listaProductos.appendChild(
+        tarjeta
+    );
+
+}
+
+
+// ==========================================
+// CREAR TARJETA PORCIÓN
+// ==========================================
+
+function crearTarjetaPorcion(
+    producto
+) {
+
+    const tarjeta =
+        document.createElement(
+            "section"
+        );
+
+    tarjeta.className =
+        "admin-card admin-card-porcion";
+
+        tarjeta.dataset.nombre =
+    producto.nombre.toLowerCase();
+
+tarjeta.dataset.tipo =
+    "porcion";
+
+tarjeta.dataset.disponible =
+    producto.disponible
+        ? "true"
+        : "false";
+
+
+    tarjeta.innerHTML = `
+
+        <h3>
+            ${producto.nombre}
+        </h3>
+
+
+        <label class="disponibilidad disponibilidad-porcion">
+
+            <input
+                type="checkbox"
+                id="porcion-disponible-${producto.id}"
+                ${producto.disponible ? "checked" : ""}
+            >
+
+            Disponible
+
+        </label>
+
+
+        <button
+            type="button"
+            onclick="guardarPorcion(${producto.id})"
+        >
+            Guardar
+        </button>
+
+
+        <p
+            id="mensaje-porcion-${producto.id}"
+        ></p>
+
+    `;
+
+
+    listaPorciones.appendChild(
+        tarjeta
+    );
 
 }
 
@@ -324,7 +461,9 @@ function crearTarjetaProducto(producto) {
 // GUARDAR PRODUCTO
 // ==========================================
 
-async function guardarProducto(idProducto) {
+async function guardarProducto(
+    idProducto
+) {
 
     const inputChica =
         document.getElementById(
@@ -341,10 +480,10 @@ async function guardarProducto(idProducto) {
             `grande-${idProducto}`
         );
 
-        const inputUnico =
-    document.getElementById(
-        `unico-${idProducto}`
-    );
+    const inputUnico =
+        document.getElementById(
+            `unico-${idProducto}`
+        );
 
     const inputDisponible =
         document.getElementById(
@@ -372,11 +511,10 @@ async function guardarProducto(idProducto) {
             ? Number(inputGrande.value)
             : null;
 
-
-            const precioUnico =
-    inputUnico.value
-        ? Number(inputUnico.value)
-        : null;
+    const precioUnico =
+        inputUnico.value
+            ? Number(inputUnico.value)
+            : null;
 
 
     mensaje.textContent =
@@ -401,8 +539,8 @@ async function guardarProducto(idProducto) {
                 precio_grande:
                     precioGrande,
 
-                    precio_unico:
-    precioUnico,
+                precio_unico:
+                    precioUnico,
 
                 disponible:
                     inputDisponible.checked
@@ -428,20 +566,122 @@ async function guardarProducto(idProducto) {
 
 
     mensaje.textContent =
-        "✅ Cambios guardados correctamente";
+        "✅ Cambios guardados";
+
+        const tarjeta =
+    inputDisponible.closest(".admin-card");
+
+if (tarjeta) {
+
+    tarjeta.dataset.disponible =
+        inputDisponible.checked
+            ? "true"
+            : "false";
+}
+
+filtrarPanelAdmin();
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        mensaje.textContent = "";
+            mensaje.textContent = "";
 
-    }, 3000);
+        },
+        3000
+    );
 
 }
 
 
 // ==========================================
-// COMPROBAR SESIÓN AL ABRIR ADMIN
+// GUARDAR DISPONIBILIDAD DE PORCIÓN
+// ==========================================
+
+async function guardarPorcion(
+    idProducto
+) {
+
+    const inputDisponible =
+        document.getElementById(
+            `porcion-disponible-${idProducto}`
+        );
+
+    const mensaje =
+        document.getElementById(
+            `mensaje-porcion-${idProducto}`
+        );
+
+
+    mensaje.textContent =
+        "Guardando...";
+
+
+    const {
+        error
+    } =
+        await supabaseCliente
+
+            .from("productos")
+
+            .update({
+
+                disponible:
+                    inputDisponible.checked
+
+            })
+
+            .eq(
+                "id",
+                idProducto
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+        mensaje.textContent =
+            "❌ No se pudo guardar.";
+
+        return;
+
+    }
+
+
+    mensaje.textContent =
+        inputDisponible.checked
+            ? "✅ Disponible"
+            : "⛔ No disponible";
+
+            const tarjeta =
+    inputDisponible.closest(
+        ".admin-card"
+    );
+
+if (tarjeta) {
+    tarjeta.dataset.disponible =
+        inputDisponible.checked
+            ? "true"
+            : "false";
+}
+
+filtrarPanelAdmin();sss
+
+    setTimeout(
+        function () {
+
+            mensaje.textContent = "";
+
+        },
+        3000
+    );
+
+}
+
+
+// ==========================================
+// COMPROBAR SESIÓN
 // ==========================================
 
 async function comprobarSesion() {
@@ -449,7 +689,9 @@ async function comprobarSesion() {
     const {
         data
     } =
-        await supabaseCliente.auth.getSession();
+        await supabaseCliente
+            .auth
+            .getSession();
 
 
     if (data.session) {
@@ -458,13 +700,163 @@ async function comprobarSesion() {
 
     } else {
 
-        loginAdmin.style.display = "";
+        loginAdmin.style.display =
+            "";
 
-        panelAdmin.style.display = "none";
+        panelAdmin.style.display =
+            "none";
 
     }
 
 }
+
+// ==========================================
+// BUSCADOR Y FILTROS DEL PANEL
+// ==========================================
+
+function filtrarPanelAdmin() {
+
+    const texto =
+        adminBuscador
+            ? adminBuscador.value
+                .toLowerCase()
+                .trim()
+            : "";
+
+
+    const tarjetas =
+        document.querySelectorAll(
+            "#lista-productos .admin-card, " +
+            "#lista-porciones .admin-card"
+        );
+
+
+    tarjetas.forEach(
+        function (tarjeta) {
+
+            const nombre =
+                tarjeta.dataset.nombre || "";
+
+            const tipo =
+                tarjeta.dataset.tipo || "";
+
+            const disponible =
+                tarjeta.dataset.disponible || "";
+
+
+            const coincideTexto =
+                nombre.includes(texto);
+
+
+            let coincideFiltro =
+                true;
+
+
+            if (
+                filtroAdminActual ===
+                "producto"
+            ) {
+
+                coincideFiltro =
+                    tipo === "producto";
+
+            }
+
+
+            if (
+                filtroAdminActual ===
+                "porcion"
+            ) {
+
+                coincideFiltro =
+                    tipo === "porcion";
+
+            }
+
+
+            if (
+                filtroAdminActual ===
+                "disponible"
+            ) {
+
+                coincideFiltro =
+                    disponible === "true";
+
+            }
+
+
+            if (
+                filtroAdminActual ===
+                "no-disponible"
+            ) {
+
+                coincideFiltro =
+                    disponible === "false";
+
+            }
+
+
+            tarjeta.style.display =
+                coincideTexto &&
+                coincideFiltro
+                    ? ""
+                    : "none";
+
+        }
+    );
+
+}
+
+
+// BUSCADOR
+
+if (adminBuscador) {
+
+    adminBuscador.addEventListener(
+        "input",
+        filtrarPanelAdmin
+    );
+
+}
+
+
+// BOTONES DE FILTRO
+
+botonesFiltroAdmin.forEach(
+    function (boton) {
+
+        boton.addEventListener(
+            "click",
+            function () {
+
+                botonesFiltroAdmin
+                    .forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "activo"
+                            );
+
+                        }
+                    );
+
+
+                boton.classList.add(
+                    "activo"
+                );
+
+
+                filtroAdminActual =
+                    boton.dataset.filtro;
+
+
+                filtrarPanelAdmin();
+
+            }
+        );
+
+    }
+);
 
 
 comprobarSesion();
