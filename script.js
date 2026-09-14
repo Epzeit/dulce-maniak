@@ -982,3 +982,4 @@ categoriasCatalogo.forEach(function (boton) {
     );
 
 });
+
