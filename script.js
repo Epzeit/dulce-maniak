@@ -983,3 +983,89 @@ categoriasCatalogo.forEach(function (boton) {
 
 });
 
+const buscadorTortas = document.getElementById("buscador-tortas");
+const botonesCategorias = document.querySelectorAll(".categoria-btn");
+const productosTortas = document.querySelectorAll("#catalogo .producto");
+const sinResultados = document.getElementById("sin-resultados");
+
+let categoriaSeleccionada = "todas";
+
+
+function filtrarTortas() {
+
+    const textoBusqueda = buscadorTortas.value
+        .toLowerCase()
+        .trim();
+
+    let cantidadVisibles = 0;
+
+
+    productosTortas.forEach(producto => {
+
+        const categoriaProducto = producto.dataset.categoria || "";
+
+        const textoProducto = producto.innerText.toLowerCase();
+
+
+        const coincideCategoria =
+            categoriaSeleccionada === "todas" ||
+            categoriaProducto === categoriaSeleccionada;
+
+
+        const coincideBusqueda =
+            textoProducto.includes(textoBusqueda);
+
+
+        if (coincideCategoria && coincideBusqueda) {
+
+            producto.style.display = "";
+
+            cantidadVisibles++;
+
+        } else {
+
+            producto.style.display = "none";
+
+        }
+
+    });
+
+
+    if (cantidadVisibles === 0) {
+
+        sinResultados.style.display = "block";
+
+    } else {
+
+        sinResultados.style.display = "none";
+
+    }
+
+}
+
+
+/* BUSCADOR */
+
+buscadorTortas.addEventListener("input", filtrarTortas);
+
+
+/* CATEGORÍAS */
+
+botonesCategorias.forEach(boton => {
+
+    boton.addEventListener("click", () => {
+
+        botonesCategorias.forEach(btn => {
+            btn.classList.remove("activo");
+        });
+
+        boton.classList.add("activo");
+
+        categoriaSeleccionada = boton.dataset.categoria;
+
+        filtrarTortas();
+
+    });
+
+});
+

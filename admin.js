@@ -666,7 +666,7 @@ if (tarjeta) {
             : "false";
 }
 
-filtrarPanelAdmin();sss
+filtrarPanelAdmin();
 
     setTimeout(
         function () {
@@ -687,28 +687,26 @@ filtrarPanelAdmin();sss
 async function comprobarSesion() {
 
     const {
-        data
-    } =
-        await supabaseCliente
-            .auth
-            .getSession();
+        data,
+        error
+    } = await supabaseCliente.auth.getUser();
 
+    if (error || !data.user) {
 
-    if (data.session) {
+        loginAdmin.style.display = "";
+        panelAdmin.style.display = "none";
 
-        mostrarPanel();
-
-    } else {
-
-        loginAdmin.style.display =
-            "";
-
-        panelAdmin.style.display =
-            "none";
-
+        return;
     }
 
+    // La seguridad real de las modificaciones
+    // está protegida por RLS en Supabase.
+    loginAdmin.style.display = "none";
+    panelAdmin.style.display = "";
+
+    await cargarProductos();
 }
+
 
 // ==========================================
 // BUSCADOR Y FILTROS DEL PANEL
