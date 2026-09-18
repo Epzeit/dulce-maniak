@@ -2236,6 +2236,243 @@ mientras se recorre toda esta zona.
     box-shadow: none !important;
 }
 
+/* =========================================
+   ZOOM SUAVE EN FOTOS DE PRODUCTOS
+========================================= */
+
+.producto img {
+    transition: transform 0.4s ease;
+}
+
+.producto img:hover {
+    transform: scale(1.11);
+}
+
+/* =========================================
+   ZOOM DE PRODUCTOS - PC
+========================================= */
+
+.producto img {
+    transition: transform 0.4s ease;
+    cursor: zoom-in;
+}
+
+@media (hover: hover) {
+
+    .producto img:hover {
+        transform: scale(1.08);
+    }
+
+}
+
+
+/* =========================================
+   VISOR DE PRODUCTOS
+========================================= */
+
+.visor-producto {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.88);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+    z-index: 99999;
+}
+
+.visor-producto.activo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.visor-producto img {
+    width: auto;
+    max-width: 92vw;
+
+    height: auto;
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    border-radius: 20px;
+
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.visor-producto.activo img {
+    transform: scale(1);
+}
+
+
+/* BOTÓN CERRAR */
+
+.cerrar-visor-producto {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 768px) {
+
+    .visor-producto {
+        padding: 15px;
+    }
+
+    .visor-producto img {
+        max-width: 95vw;
+        max-height: 80vh;
+        border-radius: 16px;
+    }
+
+}
+
+/* =========================================
+   CORRECCIÓN VISOR FOTO COMPLETA
+========================================= */
+
+/* El zoom SOLO afecta la imagen de la tarjeta */
+#catalogo .producto > img {
+    transition: transform 0.4s ease;
+    cursor: zoom-in;
+}
+
+@media (hover: hover) {
+    #catalogo .producto > img:hover {
+        transform: scale(1.08);
+    }
+}
+
+
+/* La imagen abierta NO recibe el zoom del producto */
+#visor-producto #imagen-visor-producto {
+    width: auto !important;
+    height: auto !important;
+
+    max-width: 90vw !important;
+    max-height: 88vh !important;
+
+    object-fit: contain !important;
+
+    margin: 0 !important;
+
+    transform: none;
+}
+
+#visor-producto.activo #imagen-visor-producto {
+    transform: none;
+}
+
+/* =========================================
+   VISOR FOTO PRODUCTO
+========================================= */
+
+.visor-foto {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    z-index: 999999;
+}
+
+.visor-foto img {
+    display: block;
+
+    width: auto !important;
+    height: auto !important;
+
+    max-width: 92vw !important;
+    max-height: 88vh !important;
+
+    object-fit: contain !important;
+
+    margin: 0 !important;
+    border-radius: 18px;
+
+    transform: none !important;
+}
+
+.visor-foto-cerrar {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+
+    font-size: 24px;
+    cursor: pointer;
+
+    z-index: 1000000;
+}
+
+
+/* ZOOM CON MOUSE SOLO EN EL CATÁLOGO */
+
+@media (hover: hover) {
+
+    #catalogo .producto > img {
+        cursor: zoom-in;
+        transition: transform 0.35s ease;
+    }
+
+    #catalogo .producto > img:hover {
+        transform: scale(1.08);
+    }
+
+}
+
 
 
 

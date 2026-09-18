@@ -1069,3 +1069,56 @@ botonesCategorias.forEach(boton => {
 
 });
 
+// ==========================================
+// FOTO DE PRODUCTO A PANTALLA COMPLETA
+// ==========================================
+
+document.querySelectorAll("#catalogo .producto img, #porciones img").forEach(imagen => {
+
+    imagen.addEventListener("click", function () {
+
+        // Crear fondo
+        const visor = document.createElement("div");
+        visor.className = "visor-foto";
+
+        // Crear imagen grande
+        const fotoGrande = document.createElement("img");
+        fotoGrande.src = this.src;
+        fotoGrande.alt = this.alt || "Producto Dulce Maniak";
+
+        // Crear botón cerrar
+        const cerrar = document.createElement("button");
+        cerrar.className = "visor-foto-cerrar";
+        cerrar.innerHTML = "✕";
+        cerrar.type = "button";
+
+        visor.appendChild(fotoGrande);
+        visor.appendChild(cerrar);
+
+        document.body.appendChild(visor);
+        document.body.style.overflow = "hidden";
+
+
+        // Cerrar con la X
+        cerrar.addEventListener("click", function () {
+            visor.remove();
+            document.body.style.overflow = "";
+        });
+
+
+        // Cerrar tocando el fondo
+        visor.addEventListener("click", function (e) {
+
+            if (e.target === visor) {
+                visor.remove();
+                document.body.style.overflow = "";
+            }
+
+        });
+
+    });
+
+});
+
+
+
