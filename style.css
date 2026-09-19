@@ -1607,123 +1607,214 @@ mientras se recorre toda esta zona.
 
 /* Información importante */
 .info-importante .info-contenido h2 {
-    color: #6f2944 !important;
-    font-weight: 800 !important;
+    color: #4f172b !important;
+    font-weight: 900 !important;
     opacity: 1 !important;
 }
 
 /* Todo lo que necesitás saber... */
 .info-importante .info-subtitulo {
-    color: #6f2944 !important;
-    font-weight: 600 !important;
+    color: #68243d !important;
+    font-weight: 700 !important;
     opacity: 1 !important;
 }
 
 /* Gracias por ser parte ♡ */
 .info-importante .info-final {
-    color: #6f2944 !important;
-    font-weight: 700 !important;
+    color: #68243d !important;
+    font-weight: 800 !important;
     opacity: 1 !important;
 }
 
-/* =========================
-   BUSCADOR Y CATEGORÍAS
-========================= */
+/* ========================================
+   BUSCADOR + CATEGORÍAS MODERNAS
+======================================== */
 
 .filtros-catalogo {
     width: 100%;
-    max-width: 1000px;
-    margin: 0 auto 35px;
-    padding: 0 15px;
+    max-width: 760px;
+    margin: 35px auto 55px;
 }
 
 
-/* BUSCADOR */
+/* ===== BUSCADOR ===== */
 
 .buscador-tortas {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    position: relative;
 
+    width: calc(100% - 30px);
+    max-width: 650px;
+
+    margin: 0 auto 25px;
+}
+
+#buscador-tortas {
     width: 100%;
-    max-width: 600px;
+    height: 64px;
 
-    margin: 0 auto 22px;
-    padding: 14px 20px;
+    padding: 0 55px 0 62px;
 
-    background: white;
-    border: 2px solid #ead4da;
-    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 22px;
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    background: rgba(255, 255, 255, 0.90);
 
-    transition: 0.3s;
-}
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-.buscador-tortas:focus-within {
-    border-color: #d98fa3;
-    box-shadow: 0 8px 30px rgba(217, 143, 163, 0.20);
-}
-
-.buscador-tortas span {
-    font-size: 20px;
-}
-
-.buscador-tortas input {
-    width: 100%;
-
-    border: none;
-    outline: none;
-
-    background: transparent;
+    color: #4b2733;
 
     font-size: 17px;
-    color: #333;
+    font-weight: 500;
+    font-family: inherit;
+
+    outline: none;
+
+    box-shadow:
+        0 12px 30px rgba(31, 10, 17, 0.14),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
 }
 
-.buscador-tortas input::placeholder {
-    color: #999;
+
+/* PLACEHOLDER */
+
+#buscador-tortas::placeholder {
+    color: #a29197;
+    opacity: 1;
 }
 
 
-/* BOTONES DE CATEGORÍAS */
+/* CUANDO SE TOCA */
+
+#buscador-tortas:focus {
+    transform: translateY(-2px);
+
+    border-color: rgba(222, 128, 158, .85);
+
+    box-shadow:
+        0 16px 38px rgba(31, 10, 17, .18),
+        0 0 0 4px rgba(222, 128, 158, .14);
+}
+
+
+/* LUPA */
+
+.icono-buscar {
+    position: absolute;
+
+    left: 23px;
+    top: 50%;
+
+    transform: translateY(-52%);
+
+    z-index: 2;
+
+    font-size: 30px;
+    line-height: 1;
+
+    color: #9b536b;
+
+    pointer-events: none;
+
+    transition: transform .25s ease;
+}
+
+
+/* PEQUEÑA ANIMACIÓN */
+
+.buscador-tortas:focus-within .icono-buscar {
+    transform: translateY(-52%) scale(1.12);
+}
+
+
+/* ========================================
+   CATEGORÍAS
+======================================== */
 
 .categorias-tortas {
     display: flex;
+    align-items: center;
     justify-content: center;
+
     flex-wrap: wrap;
 
     gap: 10px;
+
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 6px 10px 12px;
 }
 
+.categorias-tortas::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* BOTONES */
+
 .categoria-btn {
-    border: 1px solid #d98fa3;
+    flex: 0 0 auto;
 
-    background: white;
-    color: #9f5267;
+    padding: 11px 20px;
 
-    padding: 10px 18px;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 999px;
 
-    border-radius: 25px;
+    background: rgba(255,255,255,.82);
 
-    font-size: 15px;
-    font-weight: 600;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: #5c2639;
+
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 800;
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    box-shadow: 0 5px 15px rgba(30, 10, 18, .08);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
 }
+
+
+/* HOVER PC */
 
 .categoria-btn:hover {
-    background: #fceef2;
     transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(30, 10, 18, .13);
 }
 
+
+/* CATEGORÍA SELECCIONADA */
+
 .categoria-btn.activo {
-    background: #d98fa3;
     color: white;
 
-    box-shadow: 0 5px 15px rgba(217, 143, 163, 0.35);
+    background: linear-gradient(
+        135deg,
+        #d985a2,
+        #b95f7e
+    );
+
+    border-color: transparent;
+
+    box-shadow:
+        0 7px 18px rgba(185, 95, 126, .30);
 }
 
 
@@ -1732,45 +1823,74 @@ mientras se recorre toda esta zona.
 #sin-resultados {
     display: none;
 
-    margin-top: 30px;
+    margin: 30px auto;
 
-    font-size: 18px;
+    color: rgba(255,255,255,.9);
+
+    font-size: 16px;
     font-weight: 600;
-
-    color: #777;
 }
 
 
-/* CELULAR */
+/* ========================================
+   CELULAR
+======================================== */
 
 @media (max-width: 600px) {
 
+    .filtros-catalogo {
+        margin-top: 28px;
+        margin-bottom: 45px;
+    }
+
     .buscador-tortas {
-        padding: 12px 16px;
+        width: calc(100% - 34px);
+        margin-bottom: 20px;
+    }
+
+    #buscador-tortas {
+        height: 58px;
+
+        border-radius: 19px;
+
+        padding-left: 55px;
+
+        font-size: 16px;
+    }
+
+    .icono-buscar {
+        left: 20px;
+        font-size: 27px;
     }
 
     .categorias-tortas {
-        justify-content: flex-start;
-        flex-wrap: nowrap;
+    display: flex;
 
-        overflow-x: auto;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 
-        padding-bottom: 8px;
+    gap: 10px;
 
-        scrollbar-width: none;
-    }
+    width: 100%;
 
-    .categorias-tortas::-webkit-scrollbar {
-        display: none;
-    }
+    padding: 6px 17px 12px;
+
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.categorias-tortas::-webkit-scrollbar {
+    display: none;
+}
 
     .categoria-btn {
-        flex-shrink: 0;
-
-        padding: 9px 15px;
-
-        font-size: 14px;
-    }
+    padding: 11px 19px;
+    font-size: 16px;
+    font-weight: 800;
+}
 }
 
 .producto.no-disponible {
@@ -2469,6 +2589,20 @@ mientras se recorre toda esta zona.
 
     #catalogo .producto > img:hover {
         transform: scale(1.08);
+    }
+
+}
+
+/* ========================================
+   NOMBRES DE PRODUCTOS - PC
+======================================== */
+
+@media (min-width: 601px) {
+
+    #catalogo .producto h3 {
+        color: rgba(255, 255, 255, 0.82);
+        font-weight: 600;
+        font-size: 15px;
     }
 
 }

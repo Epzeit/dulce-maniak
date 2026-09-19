@@ -1046,7 +1046,31 @@ function filtrarTortas() {
 
 /* BUSCADOR */
 
-buscadorTortas.addEventListener("input", filtrarTortas);
+buscadorTortas.addEventListener("input", function () {
+
+    // Si empieza a escribir, buscar en todas las categorías
+    if (buscadorTortas.value.trim() !== "") {
+
+        categoriaSeleccionada = "todas";
+
+        // Quitar selección de los demás botones
+        botonesCategorias.forEach(btn => {
+            btn.classList.remove("activo");
+        });
+
+        // Activar automáticamente "Todas"
+        const botonTodas = document.querySelector(
+            '.categoria-btn[data-categoria="todas"]'
+        );
+
+        if (botonTodas) {
+            botonTodas.classList.add("activo");
+        }
+    }
+
+    filtrarTortas();
+
+});
 
 
 /* CATEGORÍAS */
