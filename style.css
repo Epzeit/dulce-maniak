@@ -11,6 +11,26 @@ html {
     background-color: #30121d;
 }
 
+/* =========================
+   VIDEO DE FONDO GLOBAL
+========================= */
+
+.fondo-global-video {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    pointer-events: none;
+}
+
 *,
 *::before,
 *::after {
@@ -276,27 +296,7 @@ a.boton:active {
     width: 100%;
     overflow: hidden;
 
-    background-color: #6a3445;
-}
-
-/*
-El video ocupa la pantalla y permanece detrás del contenido
-mientras se recorre toda esta zona.
-*/
-.zona-fondo-video {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    object-position: center;
-
-    pointer-events: none;
+    background-color: transparent;
 }
 
 /* Une ambos fondos sin dejar una línea entre ellos */
@@ -1298,10 +1298,6 @@ mientras se recorre toda esta zona.
     .detalle-tamano .precio {
         font-size: 16px;
     }
-}
-
-.zona-fondo-secundaria .zona-fondo-video {
-    filter: brightness(0.82) contrast(0.88) saturate(0.95);
 }
 
 .animar-scroll,
